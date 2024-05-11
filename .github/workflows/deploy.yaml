@@ -3,11 +3,13 @@ name: Deploy to Kubernetes
 on:
   push:
     branches: ["main"]
+  release:
+    types: ["published"]
 
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  NAMESPACE: default
+  ENVIRONMENT: ${{ github.event_name == 'push' && 'development' || github.event_name == 'release' && 'production' }}
   REPO_NAME: komuna-ui
 
 jobs:
@@ -46,7 +48,7 @@ jobs:
             svelte-kit
           key: cache-${{ hashFiles('Dockerfile') }}
 
-      - name: inject cache into docker
+      - name: Inject cache into docker
         uses: reproducible-containers/buildkit-cache-dance@v3.1.0
         with:
           cache-map: |
@@ -55,6 +57,14 @@ jobs:
               "svelte-kit": "/code/.svelte-kit"
             }
           skip-extraction: ${{ steps.cache.outputs.cache-hit }}
+
+      - name: Disallow all robots to crawl the site
+        if: env.ENVIRONMENT != 'production'
+        run: |
+          cat << EOF > static/robots.txt
+          User-agent: *
+          Disallow: /
+          EOF
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
@@ -91,7 +101,18 @@ jobs:
           mkdir -p /home/runner/.kube
           echo "${{ secrets.KUBE_CONFIG }}" >> /home/runner/.kube/config
 
-      - run: |
+      - name: Upgrade helm release (development)
+        if: env.ENVIRONMENT == 'development'
+        run: |
           helm upgrade --install --history-max=1 \
-            -n ${{ env.NAMESPACE }} \
+            -n ${{ env.ENVIRONMENT }} --create-namespace \
+            --set ingress.host=ui.dev.komuna.id \
+            ${{ env.REPO_NAME }} .helm
+
+      - name: Upgrade helm release (production)
+        if: env.ENVIRONMENT == 'production'
+        run: |
+          helm upgrade --install --history-max=1 \
+            -n ${{ env.ENVIRONMENT }} --create-namespace \
+            --set ingress.host=ui.komuna.id \
             ${{ env.REPO_NAME }} .helm
