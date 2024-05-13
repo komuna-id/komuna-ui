@@ -10,7 +10,7 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
   ENVIRONMENT: ${{ github.event_name == 'push' && 'development' || github.event_name == 'release' && 'production' }}
-  REPO_NAME: komuna-ui
+  REPO_NAME: ui
 
 jobs:
   build:
