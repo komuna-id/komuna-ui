@@ -29,7 +29,7 @@
 		variant === 'default' && 'bg-blue-100/60 text-blue-600',
 		variant === 'primary' && 'bg-blue-600/90 text-neutral-50',
 		variant === 'transparent' && 'dimmed hover:bg-neutral-100',
-		variant === 'active-nav-link' && 'text-blue-600 hover:bg-neutral-100',
+		variant === 'active-nav-link' && 'text-blue-600 hover:bg-blue-50/80',
 		disabled && 'pointer-events-none opacity-65',
 		className,
 		__class
@@ -39,10 +39,6 @@
 {#if href}
 	<a {href} class={_class} {...rest}>
 		<slot />
-
-		{#if variant === 'active-nav-link'}
-			<div class="absolute inset-x-3.5 bottom-0 h-[0.175rem] rounded-full bg-blue-600" />
-		{/if}
 	</a>
 {:else}
 	<button class={_class} {...rest} on:click>
