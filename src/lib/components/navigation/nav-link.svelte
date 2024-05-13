@@ -15,6 +15,6 @@
 	$: active = exact ? $page.url.pathname === href : $page.url.pathname.startsWith(href);
 </script>
 
-<Button {href} size="sm" variant={active ? 'default' : 'transparent'} {...rest}>
+<Button {href} size="sm" variant={active ? 'active-nav-link' : 'transparent'} {...rest}>
 	<slot />
 </Button>
