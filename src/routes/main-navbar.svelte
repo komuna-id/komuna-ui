@@ -1,7 +1,8 @@
 <script>
 	import { Button, Container, Drawer, NavLink, Navbar } from '$lib';
-	import { GithubIcon, MenuIcon, MoonIcon, XIcon } from 'svelte-feather-icons';
+	import { GithubIcon, MenuIcon, MoonIcon, SunIcon, XIcon } from 'svelte-feather-icons';
 	import { navigating } from '$app/stores';
+	import { theme, toggleTheme } from '$lib/utils';
 
 	let openMobileNavbar = false;
 
@@ -21,8 +22,12 @@
 		<NavLink size="sm" href="/examples">Examples</NavLink>
 	</div>
 
-	<Button size="sm" square class="hidden md:flex mr-2">
-		<MoonIcon class="w-[1.075rem] h-[1.075rem] stroke-2" />
+	<Button size="sm" square class="hidden md:flex mr-2" on:click={toggleTheme}>
+		{#if $theme === 'light'}
+			<MoonIcon class="w-[1.075rem] h-[1.075rem] stroke-[2.25]" />
+		{:else}
+			<SunIcon class="w-[1.075rem] h-[1.075rem] stroke-[2.25]" />
+		{/if}
 	</Button>
 
 	<Button

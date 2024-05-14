@@ -1,4 +1,5 @@
 <script>
+	import { Provider } from '$lib';
 	import '$lib/styles.css';
 	import MainNavbar from './main-navbar.svelte';
 </script>
@@ -7,5 +8,8 @@
 	<title>Komuna UI</title>
 </svelte:head>
 
-<MainNavbar />
-<slot />
+<Provider>
+	<MainNavbar />
+
+	<slot />
+</Provider>

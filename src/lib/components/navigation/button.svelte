@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements';
-	import { twMerge } from 'tailwind-merge';
+	import { twJoin, twMerge } from 'tailwind-merge';
 
 	type $$Props = HTMLButtonAttributes &
 		HTMLAnchorAttributes & {
@@ -27,10 +27,14 @@
 		square && size === 'sm' && 'px-0 w-9',
 		square && size === 'md' && 'px-0 w-11',
 		variant === 'default' &&
-			'bg-white text-neutral-800/80 border border-neutral-200 shadow-sm hover:bg-neutral-50',
+			twJoin(
+				'bg-white text-neutral-800/80 border border-neutral-200 shadow-sm hover:bg-neutral-50',
+				'dark:bg-neutral-900 dark:hover:bg-neutral-800/50 dark:border-neutral-700/70 dark:text-neutral-300'
+			),
 		variant === 'primary' && 'bg-blue-600/90 text-neutral-50 hover:bg-blue-600',
-		variant === 'transparent' && 'text-neutral-800/80 hover:bg-neutral-100/80',
-		variant === 'active' && 'text-blue-600 bg-blue-50/90 hover:bg-blue-100/60',
+		variant === 'transparent' &&
+			'text-neutral-800/80 hover:bg-neutral-100/80 dark:text-neutral-300/80 dark:hover:bg-neutral-800/80',
+		variant === 'active' && 'text-blue-600 bg-blue-50/90 hover:bg-blue-100/60 dark:bg-blue-200/70',
 		disabled && 'pointer-events-none opacity-65',
 		className,
 		__class
