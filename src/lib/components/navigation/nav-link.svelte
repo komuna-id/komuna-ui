@@ -1,10 +1,9 @@
 <script lang="ts">
-	import type { HTMLAnchorAttributes } from 'svelte/elements';
-	import { twJoin } from 'tailwind-merge';
 	import { page } from '$app/stores';
 	import Button from './button.svelte';
+	import type { ComponentProps } from 'svelte';
 
-	type $$Props = HTMLAnchorAttributes & {
+	type $$Props = ComponentProps<Button> & {
 		exact?: boolean;
 	};
 
@@ -15,6 +14,6 @@
 	$: active = exact ? $page.url.pathname === href : $page.url.pathname.startsWith(href);
 </script>
 
-<Button {href} size="sm" variant={active ? 'active-nav-link' : 'transparent'} {...rest}>
+<Button {href} variant={active ? 'active' : 'transparent'} {...rest}>
 	<slot />
 </Button>

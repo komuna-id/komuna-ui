@@ -10,7 +10,7 @@
 	}
 
 	body {
-		@apply min-h-full relative text-base font-medium tracking-wide bg-neutral-50 text-neutral-900;
+		@apply min-h-full relative text-base font-medium tracking-wide bg-white text-neutral-900;
 	}
 
 	h1,

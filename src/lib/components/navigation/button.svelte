@@ -8,7 +8,7 @@
 			href?: string;
 			size?: 'sm' | 'md';
 			square?: boolean;
-			variant?: 'default' | 'primary' | 'transparent' | 'active-nav-link';
+			variant?: 'default' | 'primary' | 'transparent' | 'active';
 		};
 
 	export let className: $$Props['className'] = '';
@@ -26,10 +26,11 @@
 		size === 'md' && 'px-4 h-10 text-base rounded-md',
 		square && size === 'sm' && 'px-0 w-9',
 		square && size === 'md' && 'px-0 w-10',
-		variant === 'default' && 'bg-blue-100/60 text-blue-600',
-		variant === 'primary' && 'bg-blue-600/90 text-neutral-50',
-		variant === 'transparent' && 'dimmed hover:bg-neutral-100',
-		variant === 'active-nav-link' && 'text-blue-600 hover:bg-blue-50/80',
+		variant === 'default' &&
+			'bg-white text-neutral-800/80 border border-neutral-200 shadow-sm hover:bg-neutral-50',
+		variant === 'primary' && 'bg-blue-600/90 text-neutral-50 hover:bg-blue-600',
+		variant === 'transparent' && 'text-neutral-800/80 hover:bg-neutral-100/80',
+		variant === 'active' && 'text-blue-600 bg-blue-50/90 hover:bg-blue-100/60',
 		disabled && 'pointer-events-none opacity-65',
 		className,
 		__class
