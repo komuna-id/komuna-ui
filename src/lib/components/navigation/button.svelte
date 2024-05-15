@@ -22,9 +22,9 @@
 	$: _class = twMerge(
 		'font-semibold tracking-wide',
 		'relative flex items-center justify-center whitespace-nowrap',
-		size === 'sm' && 'px-3.5 h-9 text-sm rounded-md',
+		size === 'sm' && 'px-3.5 h-10 text-sm rounded-md',
 		size === 'md' && 'px-5 h-11 text-base rounded-md',
-		square && size === 'sm' && 'px-0 w-9',
+		square && size === 'sm' && 'px-0 w-10',
 		square && size === 'md' && 'px-0 w-11',
 		variant === 'default' &&
 			twJoin(
@@ -33,8 +33,9 @@
 			),
 		variant === 'primary' && 'bg-blue-600/90 text-neutral-50 hover:bg-blue-600',
 		variant === 'transparent' &&
-			'text-neutral-800/80 hover:bg-neutral-100/80 dark:text-neutral-300/80 dark:hover:bg-neutral-800/80',
-		variant === 'active' && 'text-blue-600 bg-blue-50/90 hover:bg-blue-100/60 dark:bg-blue-200/70',
+			'text-neutral-500 hover:text-neutral-800/80 dark:text-neutral-400 dark:hover:text-neutral-300',
+		variant === 'active' &&
+			'text-neutral-800/80 bg-neutral-100 dark:bg-neutral-800/80 dark:text-neutral-300',
 		disabled && 'pointer-events-none opacity-65',
 		className,
 		__class

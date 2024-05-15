@@ -7,7 +7,7 @@
 	<p class="dimmed mt-2">Open source Svelte component library for Komuna web apps.</p>
 
 	<div class="flex items-center gap-3 mt-5">
-		<Button href="/quickstart" variant="primary">Quickstart</Button>
-		<Button href="/components">View components</Button>
+		<Button href="/quickstart" size="sm" variant="primary">Quickstart</Button>
+		<Button href="/components" size="sm">View components</Button>
 	</div>
 </div>
